@@ -3,20 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { delete_single_user, get_user } from "../../redux/action/action";
 import Avatar from 'react-avatar';
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ViewUser = () => {
   const getData = useSelector((state) => state.userData);
   const user = getData?.user?.data;
   console.log(user);
   const dispatch = useDispatch();
-
+const Navigate= useNavigate();
   useEffect(() => {
     dispatch(get_user());
   }, [dispatch]);
 
   const deleteUser = (id)=>{
-    alert(id)
+    if(window.confirm('are you sure')){  
     dispatch(delete_single_user(id));
+    Navigate('add-user')
+    }
   }
   return (
     <div>
@@ -30,9 +33,7 @@ const ViewUser = () => {
               <table class="min-w-full leading-normal">
                 <thead>
                   <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Client / User
-                    </th>
+                    
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       first Name
                     </th>
@@ -57,14 +58,7 @@ const ViewUser = () => {
                       return (
                         <>
                           <tr>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                              <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10">
-                                  {/* <img className="w-full h-full rounded-full"> */}
-                                  {/* <Avatar  name="suresh"/> */}
-                                </div>
-                              </div>
-                            </td>
+                            
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <p class="text-gray-900 whitespace-no-wrap">
                                 {firstName}
@@ -102,7 +96,7 @@ const ViewUser = () => {
                           </tr>
                         </>
                       );
-                    })}
+                    })} {user <1 ? <h1>No data found</h1>:''}
                 </tbody>
               </table>
             </div>

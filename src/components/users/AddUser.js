@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { add_user } from "../../redux/action/action";
 
 
@@ -23,6 +24,7 @@ const [msg,setMsg] = useState()
       };
     });
   };
+  const Navigate= useNavigate();
 
   const sendData = async (e) => {
     e.preventDefault()
@@ -41,6 +43,7 @@ const [msg,setMsg] = useState()
     setMsg("User add successfully");
     setTimeout(() => {
       setMsg('')
+      Navigate('/')
     }, 2000);
    }
   };
@@ -62,7 +65,7 @@ const [msg,setMsg] = useState()
               First Name
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               value={addUser.fname}
@@ -101,7 +104,7 @@ const [msg,setMsg] = useState()
               Phone
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               value={addUser.phone}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { add_user, edit_single_user, single_user } from "../../redux/action/action";
+import { useNavigate } from "react-router-dom";
 
 const EditUser = () => {
 const editUserData = useSelector(state=>state?.single_user_data);
@@ -25,6 +26,7 @@ console.log(single_data,'single_user_datasingle_user_data')
       };
     });
   };
+  const Navigate= useNavigate();
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -36,16 +38,15 @@ console.log(single_data,'single_user_datasingle_user_data')
       phoneNumber: phone,
       age: age,
     };
-    if (fname && lname && phone && age == " ") {
-      setMsg("All filed requied");
-    } else {
+    
       dispatch(edit_single_user(userData,id));
       setTimeout(() => {
         setMsg("User add successfully");
       }, 2000);
       setMsg("");
+      Navigate('/')
 
-    }
+    
   };
 
   useEffect(()=>{
@@ -71,7 +72,7 @@ console.log(single_data,'single_user_datasingle_user_data')
               First Name
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               value={addUser.fname}
@@ -109,7 +110,7 @@ console.log(single_data,'single_user_datasingle_user_data')
               Phone
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               value={addUser.phone}
